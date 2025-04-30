@@ -7,11 +7,11 @@ import { calculateOverallProgress } from '@/utils/storage';
 
 interface ProgressSummaryProps {
   modules: Module[];
-  totalHours: number;
+  totalHours?: number;
   classHours?: number;
 }
 
-const ProgressSummary: React.FC<ProgressSummaryProps> = ({ modules, classHours = 0 }) => {
+const ProgressSummary: React.FC<ProgressSummaryProps> = ({ modules, totalHours = 0, classHours = 0 }) => {
   const progress = calculateOverallProgress(modules);
   
   return (

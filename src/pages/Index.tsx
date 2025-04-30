@@ -8,17 +8,24 @@ import ClassScheduler from '@/components/ClassScheduler';
 import { 
   loadData, 
   saveData, 
-  calculateClassHours
+  calculateClassHours,
+  calculateTotalHours
 } from '@/utils/storage';
 import { AppState, Lesson } from '@/utils/types';
 import { toast } from 'sonner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const Index = () => {
-  const [appState, setAppState] = useState<AppState>(() => ({
-    ...loadData(),
-    isTutorMode: false
-  }));
+  const [appState, setAppState] = useState<AppState>(() => {
+    const data = loadData();
+    // Update the PIN and Google Meet URL on initial load
+    return {
+      ...data,
+      tutorPin: '2695',
+      googleMeetLink: 'https://meet.google.com/qdt-ught-pbf',
+      isTutorMode: false
+    };
+  });
 
   const { modules, classSchedules, googleMeetLink, tutorPin, isTutorMode } = appState;
   
@@ -29,6 +36,7 @@ const Index = () => {
   }, [modules, classSchedules, googleMeetLink, tutorPin]);
 
   const classHours = calculateClassHours(classSchedules);
+  const totalHours = calculateTotalHours(modules);
 
   const updateLesson = (moduleId: string, lessonId: string, updatedLesson: Lesson) => {
     setAppState(prevState => {
@@ -101,6 +109,7 @@ const Index = () => {
         
         <ProgressSummary 
           modules={modules} 
+          totalHours={totalHours}
           classHours={classHours}
         />
         

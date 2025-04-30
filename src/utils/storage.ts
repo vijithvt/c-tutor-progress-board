@@ -1,14 +1,15 @@
+
 import { AppData } from './types';
 import { initialModules } from './initialData';
 
 const STORAGE_KEY = 'c-tutor-progress-data';
-const DEFAULT_PIN = '2695';
+const DEFAULT_PIN = '2695';  // Updated the default PIN to match the requirement
 
 export const getInitialData = (): AppData => {
   return {
     modules: initialModules,
     classSchedules: [],
-    googleMeetLink: 'https://meet.google.com/qdt-ught-pbf',
+    googleMeetLink: 'https://meet.google.com/qdt-ught-pbf',  // Updated the default Meet link
     tutorPin: DEFAULT_PIN,
   };
 };
