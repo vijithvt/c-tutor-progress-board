@@ -1,15 +1,14 @@
-
 import { AppData } from './types';
 import { initialModules } from './initialData';
 
 const STORAGE_KEY = 'c-tutor-progress-data';
-const DEFAULT_PIN = '1234';
+const DEFAULT_PIN = '2695';
 
 export const getInitialData = (): AppData => {
   return {
     modules: initialModules,
     classSchedules: [],
-    googleMeetLink: 'https://meet.google.com/abc-defg-hij',
+    googleMeetLink: 'https://meet.google.com/qdt-ught-pbf',
     tutorPin: DEFAULT_PIN,
   };
 };
@@ -73,4 +72,21 @@ export const calculateOverallProgress = (modules: AppData['modules']): number =>
   }, 0);
   
   return Math.round((completedLessons / totalLessons) * 100);
+};
+
+export const calculateClassHours = (classSchedules: AppData['classSchedules']): number => {
+  let totalMinutes = 0;
+  
+  classSchedules.forEach(schedule => {
+    if (schedule.endDateTime) {
+      const startTime = new Date(schedule.dateTime).getTime();
+      const endTime = new Date(schedule.endDateTime).getTime();
+      const durationMs = endTime - startTime;
+      if (durationMs > 0) {
+        totalMinutes += durationMs / (1000 * 60); // Convert ms to minutes
+      }
+    }
+  });
+  
+  return Math.round((totalMinutes / 60) * 10) / 10; // Round to 1 decimal place
 };

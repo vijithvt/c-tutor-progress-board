@@ -23,6 +23,7 @@ export interface Module {
 export interface ClassSchedule {
   id: string;
   dateTime: string;
+  endDateTime: string;
   mode: "Online" | "Offline";
 }
 

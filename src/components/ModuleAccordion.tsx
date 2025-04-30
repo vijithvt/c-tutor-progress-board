@@ -23,7 +23,7 @@ const ModuleAccordion: React.FC<ModuleAccordionProps> = ({
   onUpdateLesson
 }) => {
   return (
-    <Accordion type="multiple" collapsible className="w-full">
+    <Accordion type="multiple" className="w-full">
       {modules.map((module) => {
         const progress = calculateModuleProgress(module.id, modules);
         
