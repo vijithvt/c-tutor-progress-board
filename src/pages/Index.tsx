@@ -8,7 +8,6 @@ import ClassScheduler from '@/components/ClassScheduler';
 import { 
   loadData, 
   saveData, 
-  calculateTotalHours,
   calculateClassHours
 } from '@/utils/storage';
 import { AppState, Lesson } from '@/utils/types';
@@ -29,7 +28,6 @@ const Index = () => {
     saveData(dataToSave);
   }, [modules, classSchedules, googleMeetLink, tutorPin]);
 
-  const totalHours = calculateTotalHours(modules);
   const classHours = calculateClassHours(classSchedules);
 
   const updateLesson = (moduleId: string, lessonId: string, updatedLesson: Lesson) => {
@@ -103,7 +101,6 @@ const Index = () => {
         
         <ProgressSummary 
           modules={modules} 
-          totalHours={totalHours}
           classHours={classHours}
         />
         

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Copy } from 'lucide-react';
+import { Copy, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
@@ -25,11 +25,15 @@ const Header: React.FC<HeaderProps> = ({ googleMeetLink, isTutorMode, onUpdateMe
     onUpdateMeetLink(e.target.value);
   };
 
+  const openMeetLink = () => {
+    window.open(googleMeetLink, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <header className="bg-white shadow-md p-4 rounded-lg mb-6">
       <div className="flex flex-col sm:flex-row justify-between items-center">
         <h1 className="text-2xl font-bold text-primary mb-4 sm:mb-0">
-          C Programming Class Tracker
+          C Programming Course
         </h1>
         
         <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
@@ -44,9 +48,15 @@ const Header: React.FC<HeaderProps> = ({ googleMeetLink, isTutorMode, onUpdateMe
                 placeholder="Enter Google Meet link"
               />
             ) : (
-              <div className="p-2 border rounded bg-gray-50 text-sm truncate max-w-[200px] sm:max-w-xs">
+              <a 
+                href={googleMeetLink} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 border rounded bg-gray-50 text-sm truncate max-w-[200px] sm:max-w-xs text-blue-600 hover:text-blue-800 hover:underline flex items-center"
+              >
                 {googleMeetLink}
-              </div>
+                <ExternalLink className="ml-1 h-3 w-3" />
+              </a>
             )}
             <Button
               variant="ghost"

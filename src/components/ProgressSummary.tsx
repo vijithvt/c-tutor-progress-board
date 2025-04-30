@@ -11,7 +11,7 @@ interface ProgressSummaryProps {
   classHours?: number;
 }
 
-const ProgressSummary: React.FC<ProgressSummaryProps> = ({ modules, totalHours, classHours = 0 }) => {
+const ProgressSummary: React.FC<ProgressSummaryProps> = ({ modules, classHours = 0 }) => {
   const progress = calculateOverallProgress(modules);
   
   return (
@@ -24,13 +24,7 @@ const ProgressSummary: React.FC<ProgressSummaryProps> = ({ modules, totalHours, 
           <div className="text-lg font-semibold mb-2 sm:mb-0">Overall: {progress}% Complete</div>
           <div className="flex flex-col sm:flex-row sm:space-x-4">
             <div className="text-sm font-medium">
-              <span className="text-gray-500">Lesson Hours:</span> {totalHours} hrs
-            </div>
-            <div className="text-sm font-medium">
               <span className="text-gray-500">Class Hours:</span> {classHours} hrs
-            </div>
-            <div className="text-sm font-medium">
-              <span className="text-gray-500">Total:</span> {Math.round((totalHours + classHours) * 10) / 10} hrs
             </div>
           </div>
         </div>
